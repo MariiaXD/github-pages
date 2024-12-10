@@ -11,46 +11,12 @@
             font-family: 'Input Mono', monospace;
             background-color: white;
             color: black;
-            cursor: none;
+            cursor: none; /* Убираем стандартный курсор */
         }
 
         header {
             text-align: center;
             padding: 1em;
-        }
-
-        main {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            padding: 20px;
-        }
-
-        .category {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .category span {
-            position: absolute;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            width: 100%;
-            text-align: center;
-            padding: 5px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1em;
-            margin-top: auto;
         }
 
         .language-switch {
@@ -72,6 +38,51 @@
             color: white;
         }
 
+        main {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0;
+            width: 100%;
+        }
+
+        .category {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+			transition: opacity 0.3s ease; /* Эффект прозрачности при наведении */
+        }
+
+        .category:hover img {
+            opacity: 0.5; /* Прозрачность при наведении */
+        }
+		
+        .category span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-size: 15pt; /* Размер текста */
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .category:hover span {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            margin-top: auto;
+        }
+
         .custom-cursor {
             position: fixed;
             width: 20px;
@@ -91,12 +102,24 @@
         }
     </style>
     <script>
+        // Движение кастомного курсора
         document.addEventListener("mousemove", (e) => {
             const cursor = document.querySelector(".custom-cursor");
             cursor.style.left = `${e.pageX}px`;
             cursor.style.top = `${e.pageY}px`;
         });
 
+        // Добавление класса при наведении
+        document.querySelectorAll('.category, .language-switch button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.querySelector(".custom-cursor").classList.add('custom-cursor--hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                document.querySelector(".custom-cursor").classList.remove('custom-cursor--hover');
+            });
+        });
+
+        // Смена языка
         const translations = {
             en: { greeting: "Welcome!" },
             ru: { greeting: "Добро пожаловать!" },
@@ -119,30 +142,30 @@
         </div>
     </header>
     <main>
-        <div class="category" onclick="location.href='#architecture'">
+        <a class="category" href="architecture.html">
             <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Arch_01.jpg" alt="Architecture">
             <span>Architecture</span>
-        </div>
-        <div class="category" onclick="location.href='#design'">
+        </a>
+        <a class="category" href="design.html">
             <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Int_01.jpg" alt="Design">
             <span>Design</span>
-        </div>
-        <div class="category" onclick="location.href='#drawing'">
+        </a>
+        <a class="category" href="drawing.html">
             <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Art_01.jpg" alt="Drawing">
             <span>Drawing</span>
-        </div>
-        <div class="category" onclick="location.href='#photography'">
+        </a>
+        <a class="category" href="photography.html">
             <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Foto_01.jpg" alt="Photography">
             <span>Photography</span>
-        </div>
-        <div class="category" onclick="location.href='#logos'">
+        </a>
+        <a class="category" href="logos.html">
             <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/Logo_01.jpg" alt="Logos">
-            <span>Logos</span>
-        </div>
-        <div class="category" onclick="location.href='#story'">
-            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/His_01.jpg">
+            <span>Logo</span>
+        </a>
+        <a class="category" href="story.html">
+            <img src="file:///C:/Users/user/Desktop/НАШЕ%20БЮРО/03_SITE/Foto/His_01.jpg" alt="Story">
             <span>Story</span>
-        </div>
+        </a>
     </main>
     <footer>
         <p>&copy; 2024 MM</p>
